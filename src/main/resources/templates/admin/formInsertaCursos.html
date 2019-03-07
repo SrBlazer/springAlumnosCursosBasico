@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Formulario inserta curso</title>
+</head>
+<body>
+    <form th:object="${curso}" th:action="@{/admin/insertaCurso}" method="POST">
+		<p>Nombre: <input type="text" th:field="*{denominacion}"/> </p>
+		<p><input type="submit" value="Inserta curso" /></p>
+    </form>
+    <a th:href="@{listaCursos}">Volver a los cursos</a>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Buscador de alumnos</title>
+</head>
+
+<body>
+    <div class="container ">
+        <div class="row">
+            <div class="col-md-6 justify-content-center">
+                <h1>Introduce letra de inicio para la busqueda</h1>
+                <form th:action="@{/admin/buscarPorLetra}" method="POST">
+                    <div class="form-group">
+                        <label for="letra">Letra a buscar</label>
+                        <input type="text" class="form-control" id="letra" name="letra"
+                            placeholder="Introduce una letra">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </form>
+            </div>
+            <div class="col-md-6 justify-content-center" th:if="${encontrados} == true">
+                <h1>Alumnos encontrados</h1>
+                <p th:text="${letra}"></p>
+                <form th:action="@{/admin/elimPorInicial}" method="POST">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Seleccionar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="alumno: ${alumnos}">
+                                <td>
+                                    <p th:text="${alumno.nombre}"></p>
+                                </td>
+                                <td><input type="checkbox" name="seleccionado" th:value="${alumno.nombre}"></input>
+                                    </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button type="submit" class="btn btn-primary">Eliminar seleccionados</button>
+                </form>
+                <p>Va todo guay</p>
+            </div>
+            <div class="col-md-6 justify-content-center" th:if="${eliminados} == true">
+                    <h1>Alumnos eliminados</h1>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="alumno: ${seleccionado}">
+                                    <td>
+                                        <p th:text="${alumno}"></p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    <p>Va todo guay</p>
+                </div>
+        </div>
+        <div class="row justify-content-center mt-5">
+            <a th:href="@{lista}" class="btn btn-primary btn-lg" tabindex="-1" role="button" aria-disabled="true">Volver
+                a lista</a>
+        </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

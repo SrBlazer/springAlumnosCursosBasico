@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+		integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+
+	<title>Gestión de alumnos</title>
+	<style>
+		.container {
+			width: 60%;
+			margin: auto;
+		}
+
+		body {
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="row justify-content-around">
+		<h1>Bienvenido <span th:text="${nombre}"></span></h1>
+		<a th:href="@{/logout}">Salir</a>
+	</div>
+	<div th:if="${error}">
+		<p>Ese alumno ya existe</p>
+	</div>
+	<div class="container">
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Nombre</th>
+					<th scope="col">Acción</th>
+					<th scope="col">Cursos</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="alumno: ${lista}">
+					<td><a th:href="@{gestionarCursos(idalumno=${alumno.idalumno})}">
+							<p th:text="${alumno.nombre}"></p>
+						</a></td>
+					<td> <a th:href="@{eliminaAlumno(idalumno=${alumno.idalumno})}">Elimina</a>
+						<a th:href="@{modificaAlumno(idalumno=${alumno.idalumno})}">Modificar</a></td>
+					<td>
+						<div th:each="valor: ${alumno.cursos}">
+							<p th:text="${valor.curso.denominacion}"></p>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<a th:href="@{formInserta}" class="btn btn-primary btn-lg" tabindex="-1" role="button" aria-disabled="true">Insertar
+		un alumno</a>
+	<a th:href="@{listaCursos}" class="btn btn-primary btn-lg" tabindex="-1" role="button"
+		aria-disabled="true">Gestionar
+		cursos</a>
+	<a th:href="@{formFechas}" class="btn btn-primary btn-lg" tabindex="-1" role="button" aria-disabled="true">Eliminar por fechas</a>
+	<a th:href="@{formListadoPersonalizado}" class="btn btn-primary btn-lg" tabindex="-1" role="button" aria-disabled="true">Eliminar por inicial</a>
+	<a href="/" class="btn btn-primary btn-lg" tabindex="-1" role="button" aria-disabled="true">Volver al inicio</a>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>

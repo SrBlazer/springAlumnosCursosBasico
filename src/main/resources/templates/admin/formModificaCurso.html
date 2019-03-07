@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    	<form th:action="@{/admin/guardaCurso}" method="post" th:object="${curso}">
+                <p>Nombre: <input type="text" th:field="*{denominacion}" th:value="${curso.denominacion}" /></p>
+                <input type="hidden" th:field="*{idcurso}" th:value="${curso.idcurso}"/>
+                <p><input type="submit" value="Modificar" /></p>
+            </form>
+</body>
+</html>

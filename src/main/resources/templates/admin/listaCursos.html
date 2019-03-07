@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+		integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Listado de cursos</title>
+	<style>
+		.container {
+			width: 60%;
+			margin: auto;
+		}
+
+		body {
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>CRUD de Cursos</h1>
+	<div class="container">
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Curso</th>
+					<th scope="col">Acción</th>
+					<th scope="col">Alumnos</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="curso: ${listaCurso}">
+					<td th:text="${curso.denominacion}"></td>
+					<td>
+						<a th:href="@{eliminaCurso(idcurso=${curso.idcurso})}">Elimina</a>
+						<a th:href="@{modificaCurso(idcurso=${curso.idcurso})}">Modificar</a>
+					</td>
+					<td>
+						<div th:each="dato: ${curso.alumnos}">
+							<p th:text="${dato.alumno.nombre}"></p>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<a th:href="@{formInsertaCurso}" class="btn btn-primary btn-lg" tabindex="-1" role="button"
+		aria-disabled="true">Insertar
+		un curso</a>
+	<a th:href="@{lista}" class="btn btn-primary btn-lg" tabindex="-1" role="button" aria-disabled="true">Gestionar
+		alumnos</a>
+	<a href="/" class="btn btn-primary btn-lg" tabindex="-1" role="button" aria-disabled="true">Volver al inicio</a>
+</body>
+
+</html>
